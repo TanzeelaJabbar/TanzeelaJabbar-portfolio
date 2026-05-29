@@ -1,0 +1,253 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* =========================
+   THEME TOKENS (CSS VARIABLES)
+========================= */
+
+:root {
+  --radius: 1rem;
+
+  /* Lavender palette */
+  --lavender-50: oklch(0.985 0.008 295);
+  --lavender-100: oklch(0.965 0.018 290);
+  --lavender-200: oklch(0.935 0.030 290);
+  --lavender-300: oklch(0.895 0.045 290);
+  --lavender-400: oklch(0.795 0.090 290);
+
+  --background: var(--lavender-50);
+  --foreground: oklch(0.22 0.04 290);
+
+  --card: oklch(1 0 0 / 0.65);
+  --primary: oklch(0.55 0.16 290);
+  --primary-foreground: oklch(0.985 0.008 295);
+
+  --secondary: var(--lavender-200);
+  --muted: var(--lavender-100);
+  --accent: var(--lavender-300);
+
+  --border: color-mix(in oklab, var(--lavender-400) 35%, transparent);
+  --ring: var(--lavender-400);
+
+  --glow: color-mix(in oklab, var(--lavender-400) 60%, transparent);
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+.dark {
+  --lavender-50: oklch(0.18 0.025 290);
+  --lavender-100: oklch(0.22 0.032 290);
+  --lavender-200: oklch(0.27 0.04 290);
+  --lavender-300: oklch(0.36 0.06 290);
+  --lavender-400: oklch(0.62 0.13 290);
+
+  --background: oklch(0.13 0.02 290);
+  --foreground: oklch(0.96 0.012 290);
+
+  --card: oklch(0.20 0.03 290 / 0.55);
+  --primary: oklch(0.78 0.13 290);
+
+  --secondary: oklch(0.24 0.035 290);
+  --muted: oklch(0.22 0.03 290);
+  --accent: oklch(0.32 0.06 290);
+
+  --border: oklch(1 0 0 / 0.10);
+  --ring: oklch(0.70 0.13 290);
+
+  --glow: color-mix(in oklab, oklch(0.70 0.16 290) 55%, transparent);
+}
+
+
+/* =========================
+   TAILWIND THEME MAP (SECOND)
+========================= */
+@theme inline {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+}
+
+/* =========================
+   BASE
+========================= */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =========================
+   UTILITIES
+========================= */
+@layer utilities {
+
+  /* Glass effects */
+  .glass {
+    background: color-mix(in oklab, var(--background) 55%, transparent);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .glass-strong {
+    background: color-mix(in oklab, var(--card) 90%, transparent);
+    backdrop-filter: blur(24px);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 0.2rem);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(
+      110deg,
+      var(--lavender-400),
+      var(--primary),
+      var(--lavender-400)
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glow */
+  .glow-ring {
+    box-shadow: 0 10px 60px -15px var(--glow);
+  }
+
+  /* Radius utilities (your custom requirement) */
+  .rounded-sm { border-radius: calc(var(--radius) - 4px); }
+  .rounded-md { border-radius: calc(var(--radius) - 2px); }
+  .rounded-lg { border-radius: var(--radius); }
+  .rounded-xl { border-radius: calc(var(--radius) + 4px); }
+  .rounded-2xl { border-radius: calc(var(--radius) + 8px); }
+  .rounded-3xl { border-radius: calc(var(--radius) + 12px); }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(30px,-40px) scale(1.08); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-40px,30px) scale(1.12); }
+}
+
+.animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slower 18s ease-in-out infinite;
+}
+
+
+/* ===== Global Scrollbar (OKLCH Theme) ===== */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb (main scrollbar color) */
+::-webkit-scrollbar-thumb {
+  background: oklch(0.795 0.09 290 / 0.55); /* lavender */
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Hover state */
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.795 0.09 290 / 0.85);
+}
+
+/* Corner (where vertical & horizontal meet) */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ===== Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.795 0.09 290 / 0.55) transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.795 0.09 290 / 0.4);
+  backdrop-filter: blur(10px);
+}
+
+
+/* ===== Scrollbar (OKLCH Lavender, No Arrows) ===== */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Hide scrollbar arrows (important part) */
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: oklch(0.795 0.09 290 / 0.55);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.795 0.09 290 / 0.85);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.795 0.09 290 / 0.55) transparent;
+}
