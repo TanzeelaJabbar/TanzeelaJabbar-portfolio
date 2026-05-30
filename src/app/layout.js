@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/styles/global.css";
 import "@/app/styles/color.css";
 import "@/app/styles/typography.css";
+import "react-photo-view/dist/react-photo-view.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

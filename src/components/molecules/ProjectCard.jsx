@@ -1,27 +1,29 @@
 import { ExternalLink, GitHub } from "lucide-react";
 import { Pill } from "@/components/atoms/Pill";
+import { PhotoView } from "react-photo-view";
 
 export function ProjectCard({ project }) {
   return (
     <article className="glass rounded-2xl overflow-hidden group hover:-translate-y-2 hover:glow-ring transition-all duration-500 flex flex-col">
-      
-      {/* IMAGE */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-accent">
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-lavender-300 to-lavender-400 group-hover:scale-110 transition-transform duration-700"
-          style={{
-            backgroundImage: `url(${project.image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
-      </div>
+      {/* IMAGE */}
+      <PhotoView src={project?.image}>
+        <div className="relative aspect-[16/10] overflow-hidden bg-accent cursor-pointer">
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-lavender-300 to-lavender-400 group-hover:scale-110 transition-transform duration-700"
+            style={{
+              backgroundImage: `url(${project.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
+        </div>
+      </PhotoView>
 
       {/* CONTENT */}
       <div className="p-6 flex-1 flex flex-col">
-        
+
         <h3 className="text-xl font-semibold mb-2">
           {project.title}
         </h3>
@@ -39,7 +41,7 @@ export function ProjectCard({ project }) {
 
         {/* LINKS */}
         <div className="flex gap-3">
-          
+
           <a
             href={project.live}
             target="_blank"
