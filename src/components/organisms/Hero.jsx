@@ -130,7 +130,7 @@ const STATS = [
 
           </div>
 
-          <div className="absolute -bottom-6 -right-6 h-24 w-24 rounded-2xl bg-primary/80 glow-ring rotate-12 animate-float-slow" />
+          <div className="absolute -bottom-6 -right-6 h-24 w-24 rounded-2xl bg-primary opacity-80 glow-ring rotate-12 animate-float-slow" />
           <div className="absolute -top-6 -left-6 h-16 w-16 rounded-full bg-lavender-400 glow-ring animate-float-slower" />
         </div>
       </div>
